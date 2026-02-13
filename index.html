@@ -60,21 +60,11 @@
         </article>
       </section>
       <section class="card usage">
-        <h2>Usage &amp; costs</h2>
-        <dl>
-          <div>
-            <dt>Opus 4.6</dt>
-            <dd>42% of daily quota (60k/140k tokens)</dd>
-          </div>
-          <div>
-            <dt>Claude 3.3</dt>
-            <dd>18% of quota (20k/110k tokens)</dd>
-          </div>
-          <div>
-            <dt>Claude 4.5 Haiku</dt>
-            <dd>5% quota (3k/60k tokens)</dd>
-          </div>
-        </dl>
+        <div class="card-header">
+          <h2>API usage &amp; costs</h2>
+          <button id="usage-refresh" class="refresh">Refresh</button>
+        </div>
+        <div id="usage-list" class="usage-list" aria-live="polite"></div>
       </section>
       <section class="card meetings">
         <h2>Manager syncs</h2>
@@ -95,9 +85,35 @@
       </section>
     </main>
     <button class="test-button">Test Works</button>
-  <footer>
+    <footer>
       <p>Want to see this live? I’ll walk you through mounting it to Vercel once you’re ready.</p>
     </footer>
   </div>
+  <script>
+    const usageStats = [
+      { provider: 'Opus 4.6', tokens: 60, quota: 140, cost: '$0.60/10k', window: 'Today' },
+      { provider: 'Claude 3.3', tokens: 20, quota: 110, cost: '$0.30/10k', window: 'Today' },
+      { provider: 'Claude 4.5 Haiku', tokens: 3, quota: 60, cost: '$0.12/10k', window: 'Today' }
+    ];
+
+    function renderUsage(){
+      const container=document.getElementById('usage-list');
+      container.innerHTML = usageStats.map(stat => {
+        const percent=((stat.tokens/stat.quota)*100).toFixed(0);
+        return `<article><header><span>${stat.provider}</span><small>${stat.window}</small></header><p>${percent}% quota (${stat.tokens}k/${stat.quota}k tokens)</p><p>Cost rate ${stat.cost}</p></article>`;
+      }).join('');
+    }
+
+    function randomize(){
+      usageStats.forEach(stat => {
+        const delta=(Math.random()*4).toFixed(1);
+        stat.tokens=Math.min(stat.quota, Math.round(stat.tokens+Number(delta)));
+      });
+      renderUsage();
+    }
+
+    document.getElementById('usage-refresh').addEventListener('click', randomize);
+    renderUsage();
+  </script>
 </body>
 </html>

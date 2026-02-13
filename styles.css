@@ -36,3 +36,11 @@ footer p{margin:0;padding:1rem;font-size:.9rem;color:#94a3b8;}
 
 .test-button{position:fixed;right:1rem;bottom:1rem;padding:.9rem 1.2rem;background:#38bdf8;color:#020617;border:none;border-radius:999px;box-shadow:0 20px 40px rgba(56,189,248,.35);font-weight:600;cursor:pointer;}
 .test-button:hover{background:#0ea5e9;}
+
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;}
+.refresh{background:#2563eb;color:#fff;border:none;padding:.4rem 1rem;border-radius:999px;font-weight:600;cursor:pointer;}
+.refresh:hover{background:#1d4ed8;}
+.usage-list{display:flex;flex-direction:column;gap:.6rem;margin-top:.5rem;}
+.usage-list article{border:1px solid #1e293b;padding:.8rem;border-radius:12px;background:#0f172a;}
+.usage-list header{display:flex;justify-content:space-between;align-items:center;font-weight:600;}
+.usage-list p{margin:.2rem 0;}
