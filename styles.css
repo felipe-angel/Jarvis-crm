@@ -44,3 +44,7 @@ footer p{margin:0;padding:1rem;font-size:.9rem;color:#94a3b8;}
 .usage-list article{border:1px solid #1e293b;padding:.8rem;border-radius:12px;background:#0f172a;}
 .usage-list header{display:flex;justify-content:space-between;align-items:center;font-weight:600;}
 .usage-list p{margin:.2rem 0;}
+
+.tasks article{border:1px solid #1f2937;padding:.8rem;border-radius:12px;margin-bottom:.6rem;background:#050b16;}
+.tasks header{display:flex;justify-content:space-between;align-items:center;gap:.8rem;font-size:.95rem;font-weight:600;}
+.tasks p{margin:.45rem 0 0;color:#a0aec0;}

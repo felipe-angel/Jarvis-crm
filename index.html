@@ -66,6 +66,13 @@
         </div>
         <div id="usage-list" class="usage-list" aria-live="polite"></div>
       </section>
+      <section class="card tasks">
+        <div class="card-header">
+          <h2>Task log</h2>
+          <span class="tag">Live status</span>
+        </div>
+        <div class="task-list" id="task-list"></div>
+      </section>
       <section class="card meetings">
         <h2>Manager syncs</h2>
         <ul>
@@ -90,6 +97,45 @@
     </footer>
   </div>
   <script>
+    const usageStats = [
+      { provider: 'Opus 4.6', tokens: 60, quota: 140, cost: '$0.60/10k', window: 'Today' },
+      { provider: 'Claude 3.3', tokens: 20, quota: 110, cost: '$0.30/10k', window: 'Today' },
+      { provider: 'Claude 4.5 Haiku', tokens: 3, quota: 60, cost: '$0.12/10k', window: 'Today' }
+    ];
+
+    const taskLog = [
+      { agent: 'Jarvis · Opus 4.6', status: 'Reviewing CRM sections', detail: 'Oversee layout, check data flow' },
+      { agent: 'Coaching manager · Claude 4.5 Haiku', status: 'Analyzing Trainerize', detail: 'Summaries ready for logins' },
+      { agent: 'Opus Coder · Claude Opus 4.6', status: 'Building API Widgets', detail: 'Coding usage log & tasks' },
+      { agent: 'Reminder agent · Claude 4.5 Haiku', status: 'Monitoring gateway', detail: 'Watching for restarts & pinging you' }
+    ];
+
+    function renderUsage(){
+      const container=document.getElementById('usage-list');
+      container.innerHTML=usageStats.map(stat=>{
+        const percent=((stat.tokens/stat.quota)*100).toFixed(0);
+        return `<article><header><span>${stat.provider}</span><small>${stat.window}</small></header><p>${percent}% quota (${stat.tokens}k/${stat.quota}k tokens)</p><p>Cost rate ${stat.cost}</p></article>`;
+      }).join('');
+    }
+
+    function randomize(){
+      usageStats.forEach(stat=>{
+        stat.tokens=Math.min(stat.quota, Math.round(stat.tokens+(Math.random()*4)));
+      });
+      renderUsage();
+    }
+
+    function renderTasks(){
+      const container=document.getElementById('task-list');
+      container.innerHTML=taskLog.map(task=>`<article><header><strong>${task.agent}</strong><span>${task.status}</span></header><p>${task.detail}</p></article>`).join('');
+    }
+
+    document.getElementById('usage-refresh').addEventListener('click', randomize);
+    renderUsage();
+    renderTasks();
+  </script>
+</body>
+</html>
     const usageStats = [
       { provider: 'Opus 4.6', tokens: 60, quota: 140, cost: '$0.60/10k', window: 'Today' },
       { provider: 'Claude 3.3', tokens: 20, quota: 110, cost: '$0.30/10k', window: 'Today' },
